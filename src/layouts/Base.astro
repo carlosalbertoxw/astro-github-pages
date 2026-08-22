@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+import Cabecera from '../components/Cabecera.astro';
+import Pie from '../components/Pie.astro';
+import { ruta } from '../lib/ruta.js';
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+  noindex?: boolean;
+}
+
+const { titulo, descripcion, noindex = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href={ruta('/favicon.svg')} />
+    <title>{titulo}</title>
+    <meta name="description" content={descripcion} />
+    {noindex && <meta name="robots" content="noindex" />}
+  </head>
+  <body>
+    <Cabecera />
+
+    <main id="contenido">
+      <slot />
+    </main>
+
+    <Pie />
+
+    <!-- Astro empaqueta este script y lo sirve como modulo con hash.
+         Cada modulo se auto-desactiva si su HTML no esta en la pagina. -->
+    <script>
+      import { iniciarNavegacion } from '../scripts/navegacion.js';
+      import { iniciarRevelado } from '../scripts/revelado.js';
+      import { iniciarPrecios } from '../scripts/precios.js';
+      import { iniciarFormulario } from '../scripts/formulario.js';
+
+      iniciarNavegacion();
+      iniciarRevelado();
+      iniciarPrecios();
+      iniciarFormulario();
+    </script>
+  </body>
+</html>

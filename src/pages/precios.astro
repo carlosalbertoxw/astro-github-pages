@@ -1,0 +1,223 @@
+---
+import Base from '../layouts/Base.astro';
+import { ruta } from '../lib/ruta.js';
+
+// Los importes viven en el HTML (data-mensual / data-anual) para que la pagina
+// siga siendo correcta aunque el JavaScript no llegue a ejecutarse.
+const planes = [
+  {
+    nombre: 'Inicio',
+    descripcion: 'Para un equipo que empieza a medir en serio.',
+    mensual: 290,
+    anual: 232,
+    cta: { texto: 'Empezar prueba', clase: 'boton--fantasma' },
+    caracteristicas: [
+      'Hasta 10 usuarios',
+      '5 conectores',
+      'Paneles ilimitados',
+      'Actualizacion diaria de datos',
+      'Soporte por correo',
+    ],
+  },
+  {
+    nombre: 'Equipo',
+    descripcion: 'Cuando varias areas dependen de los mismos numeros.',
+    insignia: 'El mas contratado',
+    destacado: true,
+    mensual: 740,
+    anual: 592,
+    cta: { texto: 'Pedir una demo', clase: 'boton--primario' },
+    caracteristicas: [
+      'Hasta 50 usuarios',
+      '20 conectores',
+      'Modelado de indicadores incluido',
+      'Actualizacion cada hora',
+      'Alertas en Slack y Teams',
+      'Canal de soporte compartido',
+    ],
+  },
+  {
+    nombre: 'Corporativo',
+    descripcion: 'Varias sedes, auditoria y requisitos propios.',
+    precioTexto: 'A medida',
+    nota: 'Contrato anual',
+    cta: { texto: 'Hablar con ventas', clase: 'boton--fantasma' },
+    caracteristicas: [
+      'Usuarios ilimitados',
+      'Conectores a medida',
+      'Actualizacion en tiempo real',
+      'Inicio de sesion unico (SSO)',
+      'Registro de auditoria',
+      'Acuerdo de nivel de servicio firmado',
+    ],
+  },
+];
+
+const filas = [
+  ['Usuarios', '10', '50', 'Ilimitados'],
+  ['Conectores', '5', '20', 'A medida'],
+  ['Frecuencia de actualizacion', 'Diaria', 'Cada hora', 'Tiempo real'],
+  ['Historico de datos', '12 meses', '36 meses', 'Sin limite'],
+  ['Modelado de indicadores', '—', 'Incluido', 'Incluido'],
+  ['Alertas por umbral', 'Si', 'Si', 'Si'],
+  ['Inicio de sesion unico (SSO)', '—', '—', 'Si'],
+  ['Registro de auditoria', '—', '—', 'Si'],
+  ['Tiempo de respuesta de soporte', '48 h', '8 h', '4 h'],
+];
+
+// Marca en verde lo incluido y en gris lo que no esta disponible.
+const claseCelda = (valor) => {
+  if (valor === '—') return 'no';
+  if (valor === 'Si' || valor === 'Incluido') return 'si';
+  return undefined;
+};
+
+const preguntas = [
+  {
+    pregunta: 'Puedo cambiar de plan a mitad de mes?',
+    respuesta:
+      'Si. El cambio se prorratea sobre los dias restantes y se refleja en la siguiente factura, tanto si subes como si bajas.',
+  },
+  {
+    pregunta: 'Que pasa si supero el numero de usuarios?',
+    respuesta:
+      'Nada se bloquea. Te avisamos al llegar al 90 % y acordamos el salto de plan en la siguiente renovacion.',
+  },
+  {
+    pregunta: 'La implantacion se cobra aparte?',
+    respuesta:
+      'En Inicio y Equipo esta incluida. En Corporativo se presupuesta segun el numero de sedes y sistemas a conectar.',
+  },
+  {
+    pregunta: 'Hay permanencia?',
+    respuesta:
+      'En mensual no. En anual el compromiso es de doce meses a cambio del 20 % de descuento.',
+  },
+];
+---
+
+<Base
+  titulo="Precios — Cauce"
+  descripcion="Tres planes con precio publico y comparativa detallada. Cifras ficticias de demostracion."
+>
+  <section class="portada">
+    <div class="contenedor contenedor--estrecho">
+      <p class="antetitulo">Precios</p>
+      <h1>Precio publico, sin llamada previa</h1>
+      <p class="entradilla">
+        Todos los planes incluyen paneles ilimitados y actualizaciones. Cifras ficticias,
+        solo para la demo.
+      </p>
+
+      <div class="conmutador" role="group" aria-label="Periodo de facturacion">
+        <button type="button" class="conmutador__opcion es-activa" data-periodo="mensual">
+          Mensual
+        </button>
+        <button type="button" class="conmutador__opcion" data-periodo="anual">
+          Anual <span class="pastilla">-20 %</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--sin-tope">
+    <div class="contenedor">
+      <div class="rejilla rejilla--3 rejilla--planes">
+        {planes.map((plan) => (
+          <article class:list={['plan', plan.destacado && 'plan--destacado']} data-revelar>
+            {plan.insignia && <p class="plan__insignia">{plan.insignia}</p>}
+            <h2 class="plan__nombre">{plan.nombre}</h2>
+            <p class="plan__descripcion">{plan.descripcion}</p>
+
+            {plan.precioTexto ? (
+              <p class="plan__precio plan__precio--texto">{plan.precioTexto}</p>
+            ) : (
+              <p class="plan__precio">
+                <span class="plan__moneda">€</span><span
+                  data-precio
+                  data-mensual={plan.mensual}
+                  data-anual={plan.anual}>{plan.mensual}</span>
+                <span class="plan__periodo">/ mes</span>
+              </p>
+            )}
+
+            {plan.nota ? (
+              <p class="plan__nota">{plan.nota}</p>
+            ) : (
+              <p class="plan__nota" data-nota-periodo>Facturado mensualmente</p>
+            )}
+
+            <a class:list={['boton', plan.cta.clase, 'boton--bloque']} href={ruta('/contacto')}>
+              {plan.cta.texto}
+            </a>
+
+            <ul class="lista-marcas">
+              {plan.caracteristicas.map((caracteristica) => <li>{caracteristica}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <header class="seccion__cabecera" data-revelar>
+        <p class="antetitulo">Comparativa</p>
+        <h2>Todo lo que incluye cada plan</h2>
+      </header>
+
+      <div class="tabla-envoltorio" data-revelar>
+        <table class="tabla">
+          <caption class="visualmente-oculto">
+            Comparativa de caracteristicas entre los planes Inicio, Equipo y Corporativo
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Caracteristica</th>
+              <th scope="col">Inicio</th>
+              <th scope="col">Equipo</th>
+              <th scope="col">Corporativo</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filas.map(([caracteristica, ...celdas]) => (
+              <tr>
+                <th scope="row">{caracteristica}</th>
+                {celdas.map((celda) => <td class={claseCelda(celda)}>{celda}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--alterna">
+    <div class="contenedor contenedor--estrecho">
+      <header class="seccion__cabecera" data-revelar>
+        <p class="antetitulo">Dudas habituales</p>
+        <h2>Sobre la facturacion</h2>
+      </header>
+
+      <div class="faq" data-revelar>
+        {preguntas.map((item) => (
+          <details>
+            <summary>{item.pregunta}</summary>
+            <p>{item.respuesta}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="contenedor cta__interior" data-revelar>
+      <div>
+        <h2>Prueba 14 dias con tus datos</h2>
+        <p>Sin tarjeta y sin llamada obligatoria de ventas.</p>
+      </div>
+      <a class="boton boton--claro" href={ruta('/contacto')}>Empezar ahora</a>
+    </div>
+  </section>
+</Base>

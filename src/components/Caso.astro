@@ -1,0 +1,28 @@
+---
+// Ficha de caso de exito: la columna lateral llega por props y el relato
+// por <slot>, para que cada pagina pueda escribirlo con su propio formato.
+interface Props {
+  sector: string;
+  nombre: string;
+  resumen: string;
+  metricas: { etiqueta: string; valor: string }[];
+}
+
+const { sector, nombre, resumen, metricas } = Astro.props;
+---
+
+<article class="caso" data-revelar>
+  <div class="caso__lateral">
+    <p class="caso__sector">{sector}</p>
+    <h2>{nombre}</h2>
+    <p class="caso__resumen">{resumen}</p>
+    <dl class="caso__metricas">
+      {metricas.map((metrica) => (
+        <div><dt>{metrica.etiqueta}</dt><dd>{metrica.valor}</dd></div>
+      ))}
+    </dl>
+  </div>
+  <div class="caso__cuerpo">
+    <slot />
+  </div>
+</article>

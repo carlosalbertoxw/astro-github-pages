@@ -1,0 +1,174 @@
+---
+import Base from '../layouts/Base.astro';
+import { ruta } from '../lib/ruta.js';
+
+const bloques = [
+  {
+    numero: '01',
+    titulo: 'Implantacion guiada',
+    texto:
+      'Nos sentamos con tu equipo, mapeamos procesos y dejamos la plataforma funcionando sobre datos reales. No entregamos un entorno vacio con un manual en PDF.',
+    puntos: [
+      'Auditoria de fuentes y calidad de datos',
+      'Configuracion de entornos y permisos',
+      'Migracion de los informes que ya usas',
+      'Dos sesiones de formacion por equipo',
+    ],
+    meta: 'Duracion tipica: 2 a 4 semanas',
+  },
+  {
+    numero: '02',
+    titulo: 'Modelado de indicadores',
+    texto:
+      'La parte que casi nadie hace bien. Definimos cada metrica con su formula, su duena y su margen de tolerancia, y lo dejamos escrito donde todos puedan consultarlo.',
+    puntos: [
+      'Diccionario de metricas en lenguaje de negocio',
+      'Reglas de calculo versionadas',
+      'Alertas por umbral y por tendencia',
+      'Revision trimestral de definiciones',
+    ],
+    meta: 'Incluido desde el plan Equipo',
+  },
+  {
+    numero: '03',
+    id: 'integraciones',
+    titulo: 'Integraciones',
+    texto:
+      'Conectores mantenidos por nosotros. Si tu sistema es propietario o antiguo, construimos la carga y nos hacemos cargo de que siga funcionando.',
+    puntos: [
+      'ERP, CRM, TMS, almacen y facturacion',
+      'Bases SQL, S3 y ficheros en carpeta compartida',
+      'Webhooks y API abierta para lo tuyo',
+      'Monitorizacion de cargas fallidas',
+    ],
+    meta: 'Mas de 40 conectores disponibles',
+  },
+  {
+    numero: '04',
+    titulo: 'Soporte y evolucion',
+    texto:
+      'Un canal directo con quien conoce tu implantacion, no un formulario que acaba en un ticket generico. Y una revision periodica de que sigue sobrando y que falta.',
+    puntos: [
+      'Canal compartido en Slack o Teams',
+      'Acuerdo de respuesta segun plan',
+      'Revision trimestral de uso real',
+      'Nuevos paneles bajo demanda',
+    ],
+    meta: 'Respuesta desde 4 horas habiles',
+  },
+];
+
+const integraciones = [
+  'Sistema ERP',
+  'CRM comercial',
+  'Gestor de almacen',
+  'Plataforma de envios',
+  'Facturacion',
+  'PostgreSQL',
+  'MySQL',
+  'BigQuery',
+  'Hojas de calculo',
+  'Slack',
+  'Microsoft Teams',
+  'API propia',
+];
+
+const entra = [
+  'Conectores y su mantenimiento',
+  'Modelado de indicadores',
+  'Paneles y alertas ilimitados',
+  'Formacion del equipo',
+  'Actualizaciones de plataforma',
+];
+
+const noEntra = [
+  'Desarrollo a medida de tu ERP',
+  'Limpieza historica de mas de 5 anos',
+  'Licencias de terceros',
+  'Soporte a usuarios finales de otros sistemas',
+];
+---
+
+<Base
+  titulo="Servicios — Cauce"
+  descripcion="Implantacion, modelado de indicadores, integraciones y soporte continuo. Contenido ficticio de demostracion."
+>
+  <section class="portada">
+    <div class="contenedor contenedor--estrecho">
+      <p class="antetitulo">Servicios</p>
+      <h1>Lo que hacemos, sin letra pequena</h1>
+      <p class="entradilla">
+        Cuatro bloques de trabajo. Puedes contratarlos juntos o empezar solo por el primero
+        y decidir despues.
+      </p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="rejilla rejilla--2">
+        {bloques.map((bloque) => (
+          <article class="tarjeta tarjeta--detalle" data-revelar id={bloque.id}>
+            <p class="etiqueta">{bloque.numero}</p>
+            <h2>{bloque.titulo}</h2>
+            <p>{bloque.texto}</p>
+            <ul class="lista-marcas">
+              {bloque.puntos.map((punto) => <li>{punto}</li>)}
+            </ul>
+            <p class="tarjeta__meta">{bloque.meta}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--alterna">
+    <div class="contenedor">
+      <header class="seccion__cabecera" data-revelar>
+        <p class="antetitulo">Integraciones</p>
+        <h2>Se conecta con lo que ya tienes</h2>
+        <p class="entradilla">Nombres ficticios, a modo de ejemplo del tipo de sistema.</p>
+      </header>
+
+      <ul class="rejilla-integraciones">
+        {integraciones.map((sistema) => (
+          <li><span aria-hidden="true">◆</span> {sistema}</li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor contenedor--estrecho">
+      <header class="seccion__cabecera" data-revelar>
+        <p class="antetitulo">Alcance</p>
+        <h2>Que entra y que no</h2>
+      </header>
+
+      <div class="rejilla rejilla--2">
+        <div class="cuadro cuadro--si" data-revelar>
+          <h3>Entra en el servicio</h3>
+          <ul class="lista-marcas">
+            {entra.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+        <div class="cuadro cuadro--no" data-revelar>
+          <h3>No entra</h3>
+          <ul class="lista-cruces">
+            {noEntra.map((item) => <li>{item}</li>)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="contenedor cta__interior" data-revelar>
+      <div>
+        <h2>Cuentanos tu caso</h2>
+        <p>Te decimos en la primera llamada si tiene sentido o no. Tambien si no lo tiene.</p>
+      </div>
+      <a class="boton boton--claro" href={ruta('/contacto')}>Hablar con el equipo</a>
+    </div>
+  </section>
+</Base>

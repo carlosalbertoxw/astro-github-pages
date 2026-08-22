@@ -1,0 +1,59 @@
+---
+import { ruta, esActual } from '../lib/ruta.js';
+
+const enlaces = [
+  { href: '/', texto: 'Inicio' },
+  { href: '/servicios', texto: 'Servicios' },
+  { href: '/precios', texto: 'Precios' },
+  { href: '/casos', texto: 'Casos' },
+  { href: '/contacto', texto: 'Contacto' },
+];
+
+const actual = Astro.url.pathname;
+---
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<header class="cabecera">
+  <div class="contenedor cabecera__interior">
+    <a class="marca" href={ruta('/')}>
+      <svg class="marca__logo" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="9" fill="currentColor" />
+        <path
+          d="M9 21c3.5 0 3.5-10 7-10s3.5 10 7 10"
+          fill="none"
+          stroke="#fff"
+          stroke-width="2.6"
+          stroke-linecap="round"
+        />
+      </svg>
+      <span class="marca__texto">Cauce</span>
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="nav-principal"
+    >
+      <span class="visualmente-oculto">Abrir menu</span>
+      <span class="nav-toggle__icono" aria-hidden="true"></span>
+    </button>
+
+    <nav class="nav" id="nav-principal" aria-label="Navegacion principal">
+      <ul class="nav__lista">
+        {enlaces.map((enlace) => (
+          <li>
+            <a
+              href={ruta(enlace.href)}
+              aria-current={esActual(actual, enlace.href) ? 'page' : undefined}
+            >
+              {enlace.texto}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <a class="boton boton--primario boton--sm" href={ruta('/contacto')}>Pedir una demo</a>
+    </nav>
+  </div>
+</header>

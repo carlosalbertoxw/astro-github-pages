@@ -1,0 +1,76 @@
+---
+import { ruta } from '../lib/ruta.js';
+
+// El ano se resuelve al construir el sitio: no hace falta JavaScript en el cliente.
+const anio = new Date().getFullYear();
+
+const columnas = [
+  {
+    titulo: 'Producto',
+    enlaces: [
+      { href: '/servicios', texto: 'Servicios' },
+      { href: '/precios', texto: 'Precios' },
+      { href: '/casos', texto: 'Casos de exito' },
+      { href: '/servicios#integraciones', texto: 'Integraciones' },
+    ],
+  },
+  {
+    titulo: 'Compania',
+    enlaces: [
+      { href: '/#confianza', texto: 'Clientes' },
+      { href: '/contacto', texto: 'Contacto' },
+      { href: '/contacto#faq', texto: 'Preguntas frecuentes' },
+    ],
+  },
+];
+---
+
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__rejilla">
+      <div class="pie__marca">
+        <a class="marca" href={ruta('/')}>
+          <svg class="marca__logo" viewBox="0 0 32 32" aria-hidden="true">
+            <rect width="32" height="32" rx="9" fill="currentColor" />
+            <path
+              d="M9 21c3.5 0 3.5-10 7-10s3.5 10 7 10"
+              fill="none"
+              stroke="#fff"
+              stroke-width="2.6"
+              stroke-linecap="round"
+            />
+          </svg>
+          <span class="marca__texto">Cauce</span>
+        </a>
+        <p class="pie__lema">
+          Analitica operativa para equipos que toman decisiones cada dia, no cada trimestre.
+        </p>
+      </div>
+
+      {columnas.map((columna) => (
+        <div>
+          <h3 class="pie__titulo">{columna.titulo}</h3>
+          <ul class="pie__lista">
+            {columna.enlaces.map((enlace) => (
+              <li><a href={ruta(enlace.href)}>{enlace.texto}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+
+      <div>
+        <h3 class="pie__titulo">Contacto</h3>
+        <ul class="pie__lista">
+          <li><a href="mailto:hola@cauce.example">hola@cauce.example</a></li>
+          <li><a href="tel:+34900000000">+34 900 000 000</a></li>
+          <li>Calle Ejemplo 000, Madrid</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pie__legal">
+      <p>&copy; {anio} Cauce. Empresa ficticia, contenido de relleno para una demo.</p>
+      <p>Hecho con Astro y publicado en GitHub Pages.</p>
+    </div>
+  </div>
+</footer>
