@@ -10,7 +10,7 @@ aparición al hacer scroll. Todo el contenido y las cifras son inventados.
 
 ## Requisitos
 
-- Node.js 20+ (probado con Node 24 y Astro 7.2.4)
+- Node.js 22.12 o superior (lo exige Astro 7; probado con Node 24 y Astro 7.2.4)
 - Una cuenta de GitHub
 
 ## Desarrollo local
@@ -129,6 +129,9 @@ En GitHub: **Settings → Pages → Build and deployment → Source: GitHub Acti
 A partir de ahí, cada `push` a `main` dispara `.github/workflows/deploy.yml`, que
 construye el sitio y lo despliega. El progreso se ve en la pestaña **Actions** y
 la URL final aparece en **Settings → Pages**.
+
+> El workflow fija `node-version: 22` en `withastro/action@v3`. Sin eso la acción
+> usa Node 20 y el build falla con *«Node.js v20.x is not supported by Astro»*.
 
 ## Añadir páginas
 
