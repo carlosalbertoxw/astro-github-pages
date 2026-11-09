@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { ruta } from '../lib/ruta.js';
 
-// Los importes viven en el HTML (data-mensual / data-anual) para que la pagina
+// Los importes viven en el HTML (data-mensual / data-anual) para que la página
 // siga siendo correcta aunque el JavaScript no llegue a ejecutarse.
 const planes = [
   {
@@ -15,14 +15,14 @@ const planes = [
       'Hasta 10 usuarios',
       '5 conectores',
       'Paneles ilimitados',
-      'Actualizacion diaria de datos',
+      'Actualización diaria de datos',
       'Soporte por correo',
     ],
   },
   {
     nombre: 'Equipo',
-    descripcion: 'Cuando varias areas dependen de los mismos numeros.',
-    insignia: 'El mas contratado',
+    descripcion: 'Cuando varias áreas dependen de los mismos números.',
+    insignia: 'El más contratado',
     destacado: true,
     mensual: 740,
     anual: 592,
@@ -31,23 +31,23 @@ const planes = [
       'Hasta 50 usuarios',
       '20 conectores',
       'Modelado de indicadores incluido',
-      'Actualizacion cada hora',
+      'Actualización cada hora',
       'Alertas en Slack y Teams',
       'Canal de soporte compartido',
     ],
   },
   {
     nombre: 'Corporativo',
-    descripcion: 'Varias sedes, auditoria y requisitos propios.',
+    descripcion: 'Varias sedes, auditoría y requisitos propios.',
     precioTexto: 'A medida',
     nota: 'Contrato anual',
     cta: { texto: 'Hablar con ventas', clase: 'boton--fantasma' },
     caracteristicas: [
       'Usuarios ilimitados',
       'Conectores a medida',
-      'Actualizacion en tiempo real',
-      'Inicio de sesion unico (SSO)',
-      'Registro de auditoria',
+      'Actualización en tiempo real',
+      'Inicio de sesión único (SSO)',
+      'Registro de auditoría',
       'Acuerdo de nivel de servicio firmado',
     ],
   },
@@ -56,40 +56,40 @@ const planes = [
 const filas = [
   ['Usuarios', '10', '50', 'Ilimitados'],
   ['Conectores', '5', '20', 'A medida'],
-  ['Frecuencia de actualizacion', 'Diaria', 'Cada hora', 'Tiempo real'],
-  ['Historico de datos', '12 meses', '36 meses', 'Sin limite'],
+  ['Frecuencia de actualización', 'Diaria', 'Cada hora', 'Tiempo real'],
+  ['Histórico de datos', '12 meses', '36 meses', 'Sin límite'],
   ['Modelado de indicadores', '—', 'Incluido', 'Incluido'],
-  ['Alertas por umbral', 'Si', 'Si', 'Si'],
-  ['Inicio de sesion unico (SSO)', '—', '—', 'Si'],
-  ['Registro de auditoria', '—', '—', 'Si'],
+  ['Alertas por umbral', 'Sí', 'Sí', 'Sí'],
+  ['Inicio de sesión único (SSO)', '—', '—', 'Sí'],
+  ['Registro de auditoría', '—', '—', 'Sí'],
   ['Tiempo de respuesta de soporte', '48 h', '8 h', '4 h'],
 ];
 
 // Marca en verde lo incluido y en gris lo que no esta disponible.
 const claseCelda = (valor) => {
   if (valor === '—') return 'no';
-  if (valor === 'Si' || valor === 'Incluido') return 'si';
+  if (valor === 'Sí' || valor === 'Incluido') return 'si';
   return undefined;
 };
 
 const preguntas = [
   {
-    pregunta: 'Puedo cambiar de plan a mitad de mes?',
+    pregunta: '¿Puedo cambiar de plan a mitad de mes?',
     respuesta:
-      'Si. El cambio se prorratea sobre los dias restantes y se refleja en la siguiente factura, tanto si subes como si bajas.',
+      'Sí. El cambio se prorratea sobre los días restantes y se refleja en la siguiente factura, tanto si subes como si bajas.',
   },
   {
-    pregunta: 'Que pasa si supero el numero de usuarios?',
+    pregunta: '¿Qué pasa si supero el número de usuarios?',
     respuesta:
-      'Nada se bloquea. Te avisamos al llegar al 90 % y acordamos el salto de plan en la siguiente renovacion.',
+      'Nada se bloquea. Te avisamos al llegar al 90 % y acordamos el salto de plan en la siguiente renovación.',
   },
   {
-    pregunta: 'La implantacion se cobra aparte?',
+    pregunta: '¿La implantación se cobra aparte?',
     respuesta:
-      'En Inicio y Equipo esta incluida. En Corporativo se presupuesta segun el numero de sedes y sistemas a conectar.',
+      'En Inicio y Equipo está incluida. En Corporativo se presupuesta según el número de sedes y sistemas a conectar.',
   },
   {
-    pregunta: 'Hay permanencia?',
+    pregunta: '¿Hay permanencia?',
     respuesta:
       'En mensual no. En anual el compromiso es de doce meses a cambio del 20 % de descuento.',
   },
@@ -98,18 +98,18 @@ const preguntas = [
 
 <Base
   titulo="Precios — Cauce"
-  descripcion="Tres planes con precio publico y comparativa detallada. Cifras ficticias de demostracion."
+  descripcion="Tres planes con precio público y comparativa detallada. Cifras ficticias de demostración."
 >
   <section class="portada">
     <div class="contenedor contenedor--estrecho">
       <p class="antetitulo">Precios</p>
-      <h1>Precio publico, sin llamada previa</h1>
+      <h1>Precio público, sin llamada previa</h1>
       <p class="entradilla">
         Todos los planes incluyen paneles ilimitados y actualizaciones. Cifras ficticias,
         solo para la demo.
       </p>
 
-      <div class="conmutador" role="group" aria-label="Periodo de facturacion">
+      <div class="conmutador" role="group" aria-label="Periodo de facturación">
         <button type="button" class="conmutador__opcion es-activa" data-periodo="mensual">
           Mensual
         </button>
@@ -170,11 +170,11 @@ const preguntas = [
       <div class="tabla-envoltorio" data-revelar>
         <table class="tabla">
           <caption class="visualmente-oculto">
-            Comparativa de caracteristicas entre los planes Inicio, Equipo y Corporativo
+            Comparativa de características entre los planes Inicio, Equipo y Corporativo
           </caption>
           <thead>
             <tr>
-              <th scope="col">Caracteristica</th>
+              <th scope="col">Característica</th>
               <th scope="col">Inicio</th>
               <th scope="col">Equipo</th>
               <th scope="col">Corporativo</th>
@@ -197,7 +197,7 @@ const preguntas = [
     <div class="contenedor contenedor--estrecho">
       <header class="seccion__cabecera" data-revelar>
         <p class="antetitulo">Dudas habituales</p>
-        <h2>Sobre la facturacion</h2>
+        <h2>Sobre la facturación</h2>
       </header>
 
       <div class="faq" data-revelar>
@@ -214,7 +214,7 @@ const preguntas = [
   <section class="cta">
     <div class="contenedor cta__interior" data-revelar>
       <div>
-        <h2>Prueba 14 dias con tus datos</h2>
+        <h2>Prueba 14 días con tus datos</h2>
         <p>Sin tarjeta y sin llamada obligatoria de ventas.</p>
       </div>
       <a class="boton boton--claro" href={ruta('/contacto')}>Empezar ahora</a>

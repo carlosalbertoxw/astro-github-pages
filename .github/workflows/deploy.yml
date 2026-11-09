@@ -4,6 +4,8 @@ on:
   # Se ejecuta en cada push a la rama principal.
   push:
     branches: [main]
+  # En los pull requests solo se construye, para detectar fallos antes de mergear.
+  pull_request:
   # Permite lanzarlo a mano desde la pestaña Actions.
   workflow_dispatch:
 
@@ -15,7 +17,7 @@ permissions:
 
 # Un solo despliegue a la vez; no cancela el que ya esté en curso.
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -23,17 +25,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
+      # Instala, construye y sube dist/ como artefacto de Pages (usa Node 24).
       - name: Install, build & upload
-        uses: withastro/action@v3
-        with:
-          # La accion usa Node 20 por defecto y Astro 7 exige >=22.12.0,
-          # asi que hay que indicarlo a mano.
-          node-version: 22
-          # path: .              # raiz del proyecto Astro dentro del repo
-          # package-manager: npm
+        uses: withastro/action@v6
 
   deploy:
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:
@@ -42,4 +40,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

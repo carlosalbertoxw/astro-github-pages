@@ -5,27 +5,27 @@ import { ruta } from '../lib/ruta.js';
 const bloques = [
   {
     numero: '01',
-    titulo: 'Implantacion guiada',
+    titulo: 'Implantación guiada',
     texto:
-      'Nos sentamos con tu equipo, mapeamos procesos y dejamos la plataforma funcionando sobre datos reales. No entregamos un entorno vacio con un manual en PDF.',
+      'Nos sentamos con tu equipo, mapeamos procesos y dejamos la plataforma funcionando sobre datos reales. No entregamos un entorno vacío con un manual en PDF.',
     puntos: [
-      'Auditoria de fuentes y calidad de datos',
-      'Configuracion de entornos y permisos',
-      'Migracion de los informes que ya usas',
-      'Dos sesiones de formacion por equipo',
+      'Auditoría de fuentes y calidad de datos',
+      'Configuración de entornos y permisos',
+      'Migración de los informes que ya usas',
+      'Dos sesiones de formación por equipo',
     ],
-    meta: 'Duracion tipica: 2 a 4 semanas',
+    meta: 'Duración típica: 2 a 4 semanas',
   },
   {
     numero: '02',
     titulo: 'Modelado de indicadores',
     texto:
-      'La parte que casi nadie hace bien. Definimos cada metrica con su formula, su duena y su margen de tolerancia, y lo dejamos escrito donde todos puedan consultarlo.',
+      'La parte que casi nadie hace bien. Definimos cada métrica con su fórmula, su dueña y su margen de tolerancia, y lo dejamos escrito donde todos puedan consultarlo.',
     puntos: [
-      'Diccionario de metricas en lenguaje de negocio',
-      'Reglas de calculo versionadas',
+      'Diccionario de métricas en lenguaje de negocio',
+      'Reglas de cálculo versionadas',
       'Alertas por umbral y por tendencia',
-      'Revision trimestral de definiciones',
+      'Revisión trimestral de definiciones',
     ],
     meta: 'Incluido desde el plan Equipo',
   },
@@ -36,38 +36,38 @@ const bloques = [
     texto:
       'Conectores mantenidos por nosotros. Si tu sistema es propietario o antiguo, construimos la carga y nos hacemos cargo de que siga funcionando.',
     puntos: [
-      'ERP, CRM, TMS, almacen y facturacion',
+      'ERP, CRM, TMS, almacén y facturación',
       'Bases SQL, S3 y ficheros en carpeta compartida',
       'Webhooks y API abierta para lo tuyo',
-      'Monitorizacion de cargas fallidas',
+      'Monitorización de cargas fallidas',
     ],
-    meta: 'Mas de 40 conectores disponibles',
+    meta: 'Más de 40 conectores disponibles',
   },
   {
     numero: '04',
-    titulo: 'Soporte y evolucion',
+    titulo: 'Soporte y evolución',
     texto:
-      'Un canal directo con quien conoce tu implantacion, no un formulario que acaba en un ticket generico. Y una revision periodica de que sigue sobrando y que falta.',
+      'Un canal directo con quien conoce tu implantación, no un formulario que acaba en un ticket genérico. Y una revisión periódica de qué sigue sobrando y qué falta.',
     puntos: [
       'Canal compartido en Slack o Teams',
-      'Acuerdo de respuesta segun plan',
-      'Revision trimestral de uso real',
+      'Acuerdo de respuesta según plan',
+      'Revisión trimestral de uso real',
       'Nuevos paneles bajo demanda',
     ],
-    meta: 'Respuesta desde 4 horas habiles',
+    meta: 'Respuesta desde 4 horas hábiles',
   },
 ];
 
 const integraciones = [
   'Sistema ERP',
   'CRM comercial',
-  'Gestor de almacen',
-  'Plataforma de envios',
-  'Facturacion',
+  'Gestor de almacén',
+  'Plataforma de envíos',
+  'Facturación',
   'PostgreSQL',
   'MySQL',
   'BigQuery',
-  'Hojas de calculo',
+  'Hojas de cálculo',
   'Slack',
   'Microsoft Teams',
   'API propia',
@@ -77,13 +77,13 @@ const entra = [
   'Conectores y su mantenimiento',
   'Modelado de indicadores',
   'Paneles y alertas ilimitados',
-  'Formacion del equipo',
+  'Formación del equipo',
   'Actualizaciones de plataforma',
 ];
 
 const noEntra = [
   'Desarrollo a medida de tu ERP',
-  'Limpieza historica de mas de 5 anos',
+  'Limpieza histórica de más de 5 años',
   'Licencias de terceros',
   'Soporte a usuarios finales de otros sistemas',
 ];
@@ -91,15 +91,15 @@ const noEntra = [
 
 <Base
   titulo="Servicios — Cauce"
-  descripcion="Implantacion, modelado de indicadores, integraciones y soporte continuo. Contenido ficticio de demostracion."
+  descripcion="Implantación, modelado de indicadores, integraciones y soporte continuo. Contenido ficticio de demostración."
 >
   <section class="portada">
     <div class="contenedor contenedor--estrecho">
       <p class="antetitulo">Servicios</p>
-      <h1>Lo que hacemos, sin letra pequena</h1>
+      <h1>Lo que hacemos, sin letra pequeña</h1>
       <p class="entradilla">
         Cuatro bloques de trabajo. Puedes contratarlos juntos o empezar solo por el primero
-        y decidir despues.
+        y decidir después.
       </p>
     </div>
   </section>
@@ -142,7 +142,7 @@ const noEntra = [
     <div class="contenedor contenedor--estrecho">
       <header class="seccion__cabecera" data-revelar>
         <p class="antetitulo">Alcance</p>
-        <h2>Que entra y que no</h2>
+        <h2>Qué entra y qué no</h2>
       </header>
 
       <div class="rejilla rejilla--2">
@@ -165,8 +165,8 @@ const noEntra = [
   <section class="cta">
     <div class="contenedor cta__interior" data-revelar>
       <div>
-        <h2>Cuentanos tu caso</h2>
-        <p>Te decimos en la primera llamada si tiene sentido o no. Tambien si no lo tiene.</p>
+        <h2>Cuéntanos tu caso</h2>
+        <p>Te decimos en la primera llamada si tiene sentido o no. También si no lo tiene.</p>
       </div>
       <a class="boton boton--claro" href={ruta('/contacto')}>Hablar con el equipo</a>
     </div>

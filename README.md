@@ -10,7 +10,7 @@ aparición al hacer scroll. Todo el contenido y las cifras son inventados.
 
 ## Requisitos
 
-- Node.js 22.12 o superior (lo exige Astro 7; probado con Node 24 y Astro 7.2.4)
+- Node.js 24 (la versión está fijada en `.nvmrc`; Astro 7 admite desde Node 22.12)
 - Una cuenta de GitHub
 
 ## Desarrollo local
@@ -41,6 +41,7 @@ http://localhost:4321/astro-github-pages/ (la raíz devuelve 404).
 │   ├── components/
 │   │   ├── Cabecera.astro    # menú + marca del enlace activo
 │   │   ├── Pie.astro
+│   │   ├── Marca.astro       # logotipo + nombre (cabecera y pie)
 │   │   └── Caso.astro        # ficha de caso: props + <slot> para el relato
 │   ├── pages/                # cada archivo = una ruta
 │   │   ├── index.astro       # /
@@ -53,25 +54,30 @@ http://localhost:4321/astro-github-pages/ (la raíz devuelve 404).
 │   │   ├── navegacion.js     # menú desplegable en móvil
 │   │   ├── revelado.js       # aparición progresiva (IntersectionObserver)
 │   │   ├── precios.js        # conmutador mensual / anual
-│   │   └── formulario.js     # validación del formulario de contacto
+│   │   ├── formulario.js     # validación del formulario de contacto
+│   │   └── anio.js           # año del pie
 │   ├── styles/
 │   │   └── global.css        # hoja única: tokens, layout y componentes
 │   └── lib/
 │       └── ruta.js           # enlaces internos que respetan `base`
-└── .github/workflows/deploy.yml
+├── .nvmrc                    # versión de Node para desarrollo local
+└── .github/
+    ├── workflows/deploy.yml
+    └── dependabot.yml        # actualizaciones mensuales de dependencias y Actions
 ```
 
 ### Cómo encaja cada pieza
 
 - **`Base.astro`** envuelve todas las páginas. Recibe `titulo`, `descripcion` y
   un `noindex` opcional (lo usa la 404), e incluye un único `<script>` que
-  importa los cuatro módulos de `src/scripts/`. Astro los empaqueta y les pone
+  importa los módulos de `src/scripts/`. Astro los empaqueta y les pone
   hash automáticamente.
 - **Cada módulo se autodesactiva** si su HTML no está en la página, así que el
   mismo script sirve para el inicio, precios o contacto sin comprobaciones extra.
 - **El contenido repetido vive en arrays** dentro del frontmatter de cada página
   (planes, pasos, métricas, preguntas frecuentes) y se recorre con `.map()`.
-- **El año del pie se calcula al construir**, no en el navegador.
+- **El año del pie** sale del build como valor inicial y `anio.js` lo actualiza en
+  el navegador, para que no se quede congelado hasta el siguiente despliegue.
 
 ### Enlaces internos y `base`
 
@@ -117,7 +123,7 @@ export default defineConfig({
 ```bash
 git init -b main
 git add .
-git commit -m "Sitio estatico con Astro"
+git commit -m "Sitio estático con Astro"
 git remote add origin https://github.com/TU-USUARIO/astro-github-pages.git
 git push -u origin main
 ```
@@ -130,8 +136,9 @@ A partir de ahí, cada `push` a `main` dispara `.github/workflows/deploy.yml`, q
 construye el sitio y lo despliega. El progreso se ve en la pestaña **Actions** y
 la URL final aparece en **Settings → Pages**.
 
-> El workflow fija `node-version: 22` en `withastro/action@v3`. Sin eso la acción
-> usa Node 20 y el build falla con *«Node.js v20.x is not supported by Astro»*.
+En los pull requests el workflow solo construye el sitio, sin desplegarlo, para
+detectar fallos antes de mergear (incluidos los PR que abre Dependabot).
+`withastro/action@v6` ya usa Node 24 por defecto, así que no hace falta indicarlo.
 
 ## Añadir páginas
 
@@ -147,7 +154,7 @@ Empieza copiando la cabecera de cualquier página existente:
 import Base from '../layouts/Base.astro';
 ---
 
-<Base titulo="Titulo — Cauce" descripcion="Resumen para buscadores.">
+<Base titulo="Título — Cauce" descripcion="Resumen para buscadores.">
   <section class="seccion">
     <div class="contenedor">…</div>
   </section>
@@ -156,3 +163,7 @@ import Base from '../layouts/Base.astro';
 
 Añádela también al array `enlaces` de `src/components/Cabecera.astro` para que
 salga en el menú.
+
+## Licencia
+
+[MIT](LICENSE)

@@ -1,7 +1,9 @@
 ---
+import Marca from './Marca.astro';
 import { ruta } from '../lib/ruta.js';
 
-// El ano se resuelve al construir el sitio: no hace falta JavaScript en el cliente.
+// Año del despliegue como valor inicial; src/scripts/anio.js lo actualiza en el
+// navegador para que no se quede congelado hasta el siguiente build.
 const anio = new Date().getFullYear();
 
 const columnas = [
@@ -10,12 +12,12 @@ const columnas = [
     enlaces: [
       { href: '/servicios', texto: 'Servicios' },
       { href: '/precios', texto: 'Precios' },
-      { href: '/casos', texto: 'Casos de exito' },
+      { href: '/casos', texto: 'Casos de éxito' },
       { href: '/servicios#integraciones', texto: 'Integraciones' },
     ],
   },
   {
-    titulo: 'Compania',
+    titulo: 'Compañía',
     enlaces: [
       { href: '/#confianza', texto: 'Clientes' },
       { href: '/contacto', texto: 'Contacto' },
@@ -29,21 +31,9 @@ const columnas = [
   <div class="contenedor">
     <div class="pie__rejilla">
       <div class="pie__marca">
-        <a class="marca" href={ruta('/')}>
-          <svg class="marca__logo" viewBox="0 0 32 32" aria-hidden="true">
-            <rect width="32" height="32" rx="9" fill="currentColor" />
-            <path
-              d="M9 21c3.5 0 3.5-10 7-10s3.5 10 7 10"
-              fill="none"
-              stroke="#fff"
-              stroke-width="2.6"
-              stroke-linecap="round"
-            />
-          </svg>
-          <span class="marca__texto">Cauce</span>
-        </a>
+        <Marca />
         <p class="pie__lema">
-          Analitica operativa para equipos que toman decisiones cada dia, no cada trimestre.
+          Analítica operativa para equipos que toman decisiones cada día, no cada trimestre.
         </p>
       </div>
 
@@ -69,7 +59,7 @@ const columnas = [
     </div>
 
     <div class="pie__legal">
-      <p>&copy; {anio} Cauce. Empresa ficticia, contenido de relleno para una demo.</p>
+      <p>&copy; <span data-anio>{anio}</span> Cauce. Empresa ficticia, contenido de relleno para una demo.</p>
       <p>Hecho con Astro y publicado en GitHub Pages.</p>
     </div>
   </div>

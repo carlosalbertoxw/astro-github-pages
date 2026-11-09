@@ -33,17 +33,19 @@ const { titulo, descripcion, noindex = false } = Astro.props;
     <Pie />
 
     <!-- Astro empaqueta este script y lo sirve como modulo con hash.
-         Cada modulo se auto-desactiva si su HTML no esta en la pagina. -->
+         Cada modulo se auto-desactiva si su HTML no esta en la página. -->
     <script>
       import { iniciarNavegacion } from '../scripts/navegacion.js';
       import { iniciarRevelado } from '../scripts/revelado.js';
       import { iniciarPrecios } from '../scripts/precios.js';
       import { iniciarFormulario } from '../scripts/formulario.js';
+      import { iniciarAnio } from '../scripts/anio.js';
 
       iniciarNavegacion();
       iniciarRevelado();
       iniciarPrecios();
       iniciarFormulario();
+      iniciarAnio();
     </script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 // Construye enlaces internos respetando `base` de astro.config.mjs.
-// En desarrollo BASE_URL es '/', en produccion '/<repo>/'.
+// En desarrollo BASE_URL es '/', en producción '/<repo>/'.
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const esExterno = (destino) => /^(https?:|mailto:|tel:|#)/.test(destino);
